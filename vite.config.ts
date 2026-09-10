@@ -1,0 +1,8 @@
+import { defineConfig } from "@lovable.dev/vite-tanstack-config";
+
+export default defineConfig({
+  server: {
+    host: true,
+    allowedHosts: true,
+  },
+});
