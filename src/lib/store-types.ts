@@ -104,29 +104,29 @@ export type StoreFilter = { category: Category | "all"; query: string; label: st
 export type TelegramResult = { ok: boolean; error?: string };
 
 export async function sendTelegram(
-  settings: AdminSettings,
+  settings: AdminSettings, // إحنا مش هنستخدمها هنا، بس هنسيبها عشان الكود في باقي الملفات مايضربش
   message: string,
 ): Promise<TelegramResult> {
-  const token = (settings.telegramToken || "").trim();
-  const chatId = (settings.telegramChatId || "").trim();
-  if (!token || !chatId) return { ok: false, error: "لم يتم إدخال التوكن أو معرف المحادثة" };
   try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: message, parse_mode: "Markdown" }),
+    // هنا بنبعت الطلب للـ API بتاعنا في Vercel بدل تيليجرام مباشرة
+    const res = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message }), 
     });
-    const data = (await res.json().catch(() => null)) as
-      | { ok?: boolean; description?: string }
-      | null;
-    if (!res.ok || !data?.ok) {
-      return { ok: false, error: data?.description || `HTTP ${res.status}` };
+
+    const data = await res.json();
+
+    if (res.ok && data.success) {
+      return { ok: true };
+    } else {
+      return { ok: false, error: data.error || 'حدث خطأ غير معروف' };
     }
-    return { ok: true };
-  } catch (e) {
-    return { ok: false, error: e instanceof Error ? e.message : "تعذر الاتصال بتيليجرام" };
+  } catch (err) {
+    return { ok: false, error: 'فشل الاتصال بالسيرفر' };
   }
 }
+
 
 /** Sends a receipt image (data URL) to Telegram with a caption. */
 export async function sendTelegramPhoto(
