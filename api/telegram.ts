@@ -26,7 +26,7 @@ export default async function handler(request: any, response: any) {
     }
 
     // 5. إرسال الرسالة لتيليجرام
-    const url = https://api.telegram.org/bot${token}/sendMessage;
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
     const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
