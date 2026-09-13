@@ -844,54 +844,7 @@ function SettingsTab() {
 
 
       
-            </span>
-            <input
-              dir="ltr"
-              value={testEmail}
-              placeholder="name@example.com"
-              onChange={(e) => setTestEmail(e.target.value)}
-              className="w-full rounded-xl border border-input bg-card px-3 py-2 text-sm outline-none focus:border-gold"
-            />
-          </label>
-        </div>
-        <button
-          onClick={async () => {
-            setTest("");
-            if (!form.emailjsServiceId || !form.emailjsTemplateId || !form.emailjsPublicKey) {
-              setTest("أكمل الحقول الثلاثة أولاً (Service ID / Template ID / Public Key)");
-              return;
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(testEmail)) {
-              setTest("أدخل بريد اختبار صحيح");
-              return;
-            }
-            setTest("جارٍ الاختبار...");
-            try {
-              const emailjs = (await import("@emailjs/browser")).default;
-              await emailjs.send(
-                form.emailjsServiceId.trim(),
-                form.emailjsTemplateId.trim(),
-                { passcode: "123456", email: testEmail, to_email: testEmail, time: "5" },
-                { publicKey: form.emailjsPublicKey.trim() },
-              );
-              setTest("نجح الاتصال ✓ تم إرسال رسالة تجريبية");
-            } catch (e) {
-              const detail =
-                e && typeof e === "object" && "text" in e
-                  ? String((e as { text?: string }).text)
-                  : e instanceof Error
-                    ? e.message
-                    : "خطأ غير معروف";
-              setTest("فشل الاتصال: " + detail);
-            }
-          }}
-          className="mt-3 w-full rounded-xl border border-border bg-card py-2.5 text-xs font-bold"
-        >
-          اختبار الاتصال
-        </button>
-        {test && <p className="mt-2 text-center text-xs font-bold text-gold-foreground">{test}</p>}
-      </div>
-
+            
 
       <button
         onClick={() => {
