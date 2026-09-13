@@ -57,8 +57,6 @@ export function AuthModal({ open, onClose }: { open: boolean; onClose: () => voi
           </div>
         `
       })
- 
-    })
   });
 
   const data = await res.json();
