@@ -817,8 +817,7 @@ function SettingsTab() {
       <div className="rounded-2xl border border-border bg-surface p-4">
         <h3 className="mb-3 text-sm font-extrabold">إشعارات تيليجرام</h3>
         <div className="space-y-3">
-          {field("توكن بوت تيليجرام", "telegramToken", "123456:ABC...")}
-          {field("معرف محادثة تيليجرام", "telegramChatId", "-1001234567890")}
+          
         </div>
         <button
           onClick={async () => {
@@ -844,15 +843,7 @@ function SettingsTab() {
       </div>
 
 
-      <div className="rounded-2xl border border-border bg-surface p-4">
-        <h3 className="mb-3 text-sm font-extrabold">إعدادات EmailJS (رمز التحقق)</h3>
-        <div className="space-y-3">
-          {field("Service ID", "emailjsServiceId", "service_xxx")}
-          {field("Template ID", "emailjsTemplateId", "template_xxx")}
-          {field("Public Key", "emailjsPublicKey", "xxxxxxxxxxxx")}
-          <label className="block">
-            <span className="mb-1 block text-xs font-bold text-muted-foreground">
-              بريد الاختبار (يصل إليه الرمز التجريبي)
+      
             </span>
             <input
               dir="ltr"
