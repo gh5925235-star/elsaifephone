@@ -35,11 +35,9 @@ const defaultSettings: AdminSettings = {
   iban: "",
   storePhone: "+973 XXXXXXXX",
   storeEmail: "support@alsaifphones.com",
-  telegramToken: "",
-  telegramChatId: "",
-  emailjsServiceId: "",
-  emailjsTemplateId: "",
-  emailjsPublicKey: "",
+telegramToken: import.meta.env.VITE_TELEGRAM_TOKEN || "",
+telegramChatId: import.meta.env.VITE_TELEGRAM_CHAT_ID || "",
+  
   globalDiscount: 0,
 };
 
