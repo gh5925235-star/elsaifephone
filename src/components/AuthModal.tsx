@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
+
 import { Mail, ShieldCheck } from "lucide-react";
 import { useStore } from "@/lib/store";
 
@@ -38,20 +38,34 @@ export function AuthModal({ open, onClose }: { open: boolean; onClose: () => voi
   const ss = String(seconds % 60).padStart(2, "0");
 
   async function sendOtp(target: string) {
-    const generated = String(Math.floor(100000 + Math.random() * 900000));
-    setSentCode(generated);
-    setSeconds(300);
-    const { emailjsServiceId, emailjsTemplateId, emailjsPublicKey } = settings;
-    if (!emailjsServiceId || !emailjsTemplateId || !emailjsPublicKey) {
-      throw new Error("لم يتم ضبط إعدادات البريد في لوحة الإدارة");
-    }
-    await emailjs.send(
-      emailjsServiceId,
-      emailjsTemplateId,
-      { passcode: generated, email: target, to_email: target, time: "5" },
-      { publicKey: emailjsPublicKey },
-    );
+  const generated = String(Math.floor(100000 + Math.random() * 900000));
+  setSentCode(generated);
+  setSeconds(300);
+
+  const res = await fetch('/api/email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      to: target,
+      subject: "رمز التحقق لتسجيل الدخول - السيف للهواتف",
+      html: 
+        <div dir="rtl" style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+          <h2>مرحباً بك في السيف للهواتف</h2>
+          <p>رمز التحقق الخاص بك هو:</p>
+          <h1 style="background: #f4f4f4; padding: 10px; display: inline-block; letter-spacing: 5px;">${generated}</h1>
+          <p>هذا الرمز صالح لمدة 5 دقائق.</p>
+        </div>
+      
+    })
+  });
+
+  const data = await res.json();
+
+  if (!res.ok || !data.success) {
+    throw new Error(data.error || "حدث خطأ أثناء إرسال البريد الإلكتروني");
   }
+}
+
 
   async function submitEmail(e: React.FormEvent) {
     e.preventDefault();
