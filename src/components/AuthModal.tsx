@@ -45,17 +45,19 @@ export function AuthModal({ open, onClose }: { open: boolean; onClose: () => voi
   const res = await fetch('/api/email', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      to: target,
-      subject: "رمز التحقق لتسجيل الدخول - السيف للهواتف",
-      html: 
-        <div dir="rtl" style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
-          <h2>مرحباً بك في السيف للهواتف</h2>
-          <p>رمز التحقق الخاص بك هو:</p>
-          <h1 style="background: #f4f4f4; padding: 10px; display: inline-block; letter-spacing: 5px;">${generated}</h1>
-          <p>هذا الرمز صالح لمدة 5 دقائق.</p>
-        </div>
-      
+  body: JSON.stringify({
+        to: target,
+        subject: "رمز التحقق لتسجيل الدخول - السيف للهواتف",
+        html: `
+          <div dir="rtl" style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
+            <h2>مرحباً بك في السيف للهواتف</h2>
+            <p>رمز التحقق الخاص بك هو:</p>
+            <h1 style="background: #f4f4f4; padding: 10px; display: inline-block; letter-spacing: 5px;">${generated}</h1>
+            <p>هذا الرمز صالح لمدة 5 دقائق.</p>
+          </div>
+        `
+      })
+ 
     })
   });
 
