@@ -238,13 +238,11 @@ function waLink(o: Order) {
 }
 
 function OrdersTab() {
-  // شلنا كلمة orders القديمة عشان هنجيبها من الداتا بيز الجديدة
   const { updateOrder, deleteOrder } = useStore();
   const [doc, setDoc] = useState<any>(null);
   const [edit, setEdit] = useState<any>(null);
   const [receipt, setReceipt] = useState<string | null>(null);
 
-  // المتغيرات اللي هتشيل بيانات Supabase
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -254,12 +252,12 @@ function OrdersTab() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          // بنعيد ترتيب شكل البيانات عشان اللوحة بتاعتك تفهمها ومتعملش كراش
+          // بنعيد ترتيب شكل البيانات ونضيف كل الخانات الناقصة عشان اللوحة متعملش كراش
           const formatted = data.map(item => ({
-            id: item.id || "0",
-            created_at: item.created_at,
+            id: String(item.id || "0"),
+            created_at: item.created_at || new Date().toISOString(),
             name: item.customer_name || "غير محدد",
-            phone: item.phone || "غير محدد",
+            phone: String(item.phone || "غير محدد"),
             address: item.address || "غير محدد",
             device: item.cart_items || "غير محدد",
             storage: "",
@@ -268,7 +266,11 @@ function OrdersTab() {
             down: 0,
             months: 0,
             monthly: 0,
-            method: "طلب من الموقع"
+            method: "طلب من الموقع",
+            status: "طلب جديد",
+            cpr: "غير محدد",
+            purchaseMode: "cash",
+            receiptImage: null
           }));
           setOrders(formatted);
         }
@@ -294,6 +296,10 @@ function OrdersTab() {
 
   return (
     <div className="space-y-4">
+
+      });
+  }, []);
+
 
       {orders.map((o) => (
         <article
