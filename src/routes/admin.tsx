@@ -279,9 +279,7 @@ function OrdersTab() {
       .catch(err => {
         console.log(err);
         setLoading(false);
-      });
-  }, []);
-
+     
   if (loading) {
     return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
   }
@@ -297,8 +295,7 @@ function OrdersTab() {
   return (
     <div className="space-y-4">
 
-      });
-  }, []);
+     
 
 
       {orders.map((o) => (
