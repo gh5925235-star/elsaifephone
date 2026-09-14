@@ -238,20 +238,63 @@ function waLink(o: Order) {
 }
 
 function OrdersTab() {
-  const { orders, updateOrder, deleteOrder } = useStore();
-  const [doc, setDoc] = useState<{ order: Order; type: DocType } | null>(null);
-  const [edit, setEdit] = useState<Order | null>(null);
+  // شلنا كلمة orders القديمة عشان هنجيبها من الداتا بيز الجديدة
+  const { updateOrder, deleteOrder } = useStore();
+  const [doc, setDoc] = useState<any>(null);
+  const [edit, setEdit] = useState<any>(null);
   const [receipt, setReceipt] = useState<string | null>(null);
 
-  if (orders.length === 0)
+  // المتغيرات اللي هتشيل بيانات Supabase
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // الكود اللي بيكلم الداتا بيز أول ما اللوحة تفتح
+  useEffect(() => {
+    fetch('/api/get-orders')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          // بنعيد ترتيب شكل البيانات عشان اللوحة بتاعتك تفهمها ومتعملش كراش
+          const formatted = data.map(item => ({
+            id: item.id || "0",
+            created_at: item.created_at,
+            name: item.customer_name || "غير محدد",
+            phone: item.phone || "غير محدد",
+            address: item.address || "غير محدد",
+            device: item.cart_items || "غير محدد",
+            storage: "",
+            color: "",
+            total: Number(item.total_price) || 0,
+            down: 0,
+            months: 0,
+            monthly: 0,
+            method: "طلب من الموقع"
+          }));
+          setOrders(formatted);
+        }
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
+  }
+
+  if (orders.length === 0) {
     return (
-      <p className="rounded-2xl border border-border bg-card p-8 text-center text-sm text-muted-foreground">
+      <p className="rounded-2xl border border-border bg-surface p-8 text-center text-sm font-bold text-muted-foreground">
         لا توجد طلبات بعد. ستظهر هنا فور إتمام أي عميل لطلبه.
       </p>
     );
+  }
 
   return (
     <div className="space-y-4">
+
       {orders.map((o) => (
         <article
           key={o.id}
