@@ -115,6 +115,19 @@ function Checkout() {
       purchaseMode: mode,
     });
     updateOrder(order.id, { status: "بانتظار اختيار طريقة الدفع" });
+       // إرسال الطلب لقاعدة البيانات في Supabase
+    fetch('/api/database', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer_name: name,
+        phone: phone,
+        address: address,
+        cart_items: `${device} - ${storages} - ${chosenColor}`,
+        total_price: isCash ? cashTotal : total
+      })
+    }).catch(err => console.log(err));
+
     setOrderId(order.id);
 
     const purchaseLabel = isCash ? "شراء نقداً كامل" : "تقسيط شهري";
