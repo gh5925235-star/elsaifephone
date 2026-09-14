@@ -238,11 +238,13 @@ function waLink(o: Order) {
 }
 
 function OrdersTab() {
+  // شلنا كلمة orders القديمة عشان هنجيبها من الداتا بيز الجديدة
   const { updateOrder, deleteOrder } = useStore();
   const [doc, setDoc] = useState<any>(null);
   const [edit, setEdit] = useState<any>(null);
   const [receipt, setReceipt] = useState<string | null>(null);
 
+  // المتغيرات اللي هتشيل بيانات Supabase
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -252,12 +254,12 @@ function OrdersTab() {
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) {
-          // بنعيد ترتيب شكل البيانات ونضيف كل الخانات الناقصة عشان اللوحة متعملش كراش
+          // بنعيد ترتيب شكل البيانات عشان اللوحة بتاعتك تفهمها ومتعملش كراش
           const formatted = data.map(item => ({
-            id: String(item.id || "0"),
-            created_at: item.created_at || new Date().toISOString(),
+            id: item.id || "0",
+            created_at: item.created_at,
             name: item.customer_name || "غير محدد",
-            phone: String(item.phone || "غير محدد"),
+            phone: item.phone || "غير محدد",
             address: item.address || "غير محدد",
             device: item.cart_items || "غير محدد",
             storage: "",
@@ -266,11 +268,7 @@ function OrdersTab() {
             down: 0,
             months: 0,
             monthly: 0,
-            method: "طلب من الموقع",
-            status: "طلب جديد",
-            cpr: "غير محدد",
-            purchaseMode: "cash",
-            receiptImage: null
+            method: "طلب من الموقع"
           }));
           setOrders(formatted);
         }
@@ -279,7 +277,9 @@ function OrdersTab() {
       .catch(err => {
         console.log(err);
         setLoading(false);
-     
+      });
+  }, []);
+
   if (loading) {
     return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
   }
@@ -294,6 +294,7 @@ function OrdersTab() {
 
   return (
     <div className="space-y-4">
+
 
      
 
