@@ -790,6 +790,29 @@ function SettingsTab() {
   const [test, setTest] = useState("");
   const [tgTest, setTgTest] = useState("");
   const [testEmail, setTestEmail] = useState("");
+const saveToDatabase = async (currentForm) => {
+  try {
+    const { error } = await supabase
+      .from('store_settings')
+      .update({
+        payNowUrl: currentForm.payNowUrl,
+        deliveryFeeUrl: currentForm.deliveryFeeUrl,
+        benefitUrl: currentForm.benefitUrl,
+        bankName: currentForm.bankName,
+        accountName: currentForm.accountName,
+        iban: currentForm.iban,
+        storePhone: currentForm.storePhone,
+        storeEmail: currentForm.storeEmail
+      })
+      .eq('id', 1);
+
+    if (error) {
+      console.error("خطأ من قاعدة البيانات:", error);
+    }
+  } catch (err) {
+    console.error("خطأ في الاتصال:", err);
+  }
+};
 
 
 
@@ -899,11 +922,26 @@ function SettingsTab() {
             
 
       <button
-        onClick={() => {
-          saveSettings(form);
-          setSaved(true);
-          setTimeout(() => setSaved(false), 2000);
-        }}
+        onClick={async () => {
+  saveSettings(form);
+  try {
+    await supabase.from('store_settings').update({
+      payNowUrl: form.payNowUrl,
+      deliveryFeeUrl: form.deliveryFeeUrl,
+      benefitUrl: form.benefitUrl,
+      bankName: form.bankName,
+      accountName: form.accountName,
+      iban: form.iban,
+      storePhone: form.storePhone,
+      storeEmail: form.storeEmail
+    }).eq('id', 1);
+  } catch (err) {
+    console.error(err);
+  }
+  setSaved(true);
+  setTimeout(() => setSaved(false), 2000);
+}}
+
         className="w-full rounded-xl bg-primary py-3 text-sm font-extrabold text-primary-foreground"
       >
         حفظ الإعدادات
