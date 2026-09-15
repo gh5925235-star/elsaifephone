@@ -925,22 +925,18 @@ const saveToDatabase = async (currentForm) => {
         onClick={async () => {
   saveSettings(form);
   try {
-    await supabase.from('store_settings').update({
-      payNowUrl: form.payNowUrl,
-      deliveryFeeUrl: form.deliveryFeeUrl,
-      benefitUrl: form.benefitUrl,
-      bankName: form.bankName,
-      accountName: form.accountName,
-      iban: form.iban,
-      storePhone: form.storePhone,
-      storeEmail: form.storeEmail
-    }).eq('id', 1);
+    await fetch('/api/update-settings', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(form)
+    });
   } catch (err) {
-    console.error(err);
+    console.error("خطأ في الاتصال بالـ API:", err);
   }
   setSaved(true);
   setTimeout(() => setSaved(false), 2000);
 }}
+
 
         className="w-full rounded-xl bg-primary py-3 text-sm font-extrabold text-primary-foreground"
       >
