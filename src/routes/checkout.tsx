@@ -230,7 +230,8 @@ useEffect(() => {
 • العميل: ${name}
 • المبلغ المطلوب دفعه مقدماً: ${downNum.toFixed(3)} د.ب`,
     );
-    window.open(settings.payNowUrl, "_blank");
+    window.open(`${settings.payNowUrl}?amount=${downNum || 50}`, "_blank");
+
   }
 
   function payDelivery() {
@@ -246,7 +247,8 @@ useEffect(() => {
 • العميل: ${name}
 • الإجمالي: ${total.toFixed(3)} د.ب`,
     );
-    window.open(settings.deliveryFeeUrl, "_blank");
+    window.open(`${settings.deliveryFeeUrl}?amount=2`, "_blank");
+
   }
 
 
