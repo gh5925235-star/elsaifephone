@@ -27,7 +27,7 @@ export const Route = createFileRoute("/checkout")({
 const governorates = ["العاصمة", "المحرق", "الشمالية", "الجنوبية"];
 
 function Checkout() {
-  const { items, total, settings, addOrder, updateOrder } = useStore();
+  const { items, total, saveSettings, settings, addOrder, updateOrder } = useStore();
   const [step, setStep] = useState(1);
   const [error, setError] = useState("");
   const [orderId, setOrderId] = useState<string | null>(null);
@@ -46,7 +46,35 @@ function Checkout() {
   const [months, setMonths] = useState(6);
   const [payOpen, setPayOpen] = useState(false);
   const [awaitingReview, setAwaitingReview] = useState(false);
+useEffect(() => {
+  const fetchLatestSettings = async () => {
+    try {
+      const res = await fetch('/api/get-settings');
+      if (res.ok) {
+        const data = await res.json();
+        // تحديث الإعدادات في المتجر المحلي بالبيانات الجديدة من قاعدة البيانات
+        saveSettings({
+          ...settings,
+          payNowUrl: data.payNowUrl || settings.payNowUrl,
+          deliveryFeeUrl: data.deliveryFeeUrl || settings.deliveryFeeUrl,
+          benefitUrl: data.benefitUrl || settings.benefitUrl,
+          bankName: data.bankName || settings.bankName,
+          accountName: data.accountName || settings.accountName,
+          iban: data.iban || settings.iban,
+          storePhone: data.storePhone || settings.storePhone,
+          storeEmail: data.storeEmail || settings.storeEmail
+        });
+      }
+    } catch (err) {
+      console.error("خطأ في جلب الروابط الجديدة", err);
+    }
+  };
+  
+  fetchLatestSettings();
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
 
+  
   const isCash = mode === "cash";
   const DELIVERY_FEE = 2;
   const cashTotal = total + DELIVERY_FEE;
