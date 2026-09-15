@@ -790,6 +790,32 @@ function SettingsTab() {
   const [test, setTest] = useState("");
   const [tgTest, setTgTest] = useState("");
   const [testEmail, setTestEmail] = useState("");
+  useEffect(() => {
+  const fetchSettings = async () => {
+    try {
+      const res = await fetch('/api/get-settings');
+      if (res.ok) {
+        const data = await res.json();
+        setForm((prev) => ({
+          ...prev,
+          payNowUrl: data.payNowUrl || prev.payNowUrl,
+          deliveryFeeUrl: data.deliveryFeeUrl || prev.deliveryFeeUrl,
+          benefitUrl: data.benefitUrl || prev.benefitUrl,
+          bankName: data.bankName || prev.bankName,
+          accountName: data.accountName || prev.accountName,
+          iban: data.iban || prev.iban,
+          storePhone: data.storePhone || prev.storePhone,
+          storeEmail: data.storeEmail || prev.storeEmail
+        }));
+      }
+    } catch (err) {
+      console.error("خطأ في جلب الإعدادات", err);
+    }
+  };
+  
+  fetchSettings();
+}, []);
+
 const saveToDatabase = async (currentForm) => {
   try {
     const { error } = await supabase
