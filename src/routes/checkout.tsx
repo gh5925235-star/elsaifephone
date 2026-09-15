@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { bhd } from "@/lib/products";
 import { useStore } from "@/lib/store";
 import { sendTelegram, sendTelegramPhoto } from "@/lib/store-types";
