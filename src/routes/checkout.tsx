@@ -34,11 +34,8 @@ function Checkout() {
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [gov, setGov] = useState(governorates[0]);
-  const [area, setArea] = useState("");
-  const [block, setBlock] = useState("");
-  const [street, setStreet] = useState("");
-  const [building, setBuilding] = useState("");
+  const [address, setAddress] = useState("");
+
   const [cpr, setCpr] = useState("");
 
   const [mode, setMode] = useState<"cash" | "installment">("installment");
@@ -82,11 +79,7 @@ useEffect(() => {
   const remaining = Math.max(total - downNum, 0);
   const monthly = months > 0 ? remaining / months : remaining;
 
-  const address = useMemo(
-    () =>
-      `محافظة ${gov}، منطقة ${area}، مجمع ${block}، شارع ${street}، مبنى/شقة ${building}`,
-    [gov, area, block, street, building],
-  );
+  
 
   const device = items
     .map((i) => `${i.name} ${i.storage}${i.qty > 1 ? ` ×${i.qty}` : ""}`)
@@ -102,8 +95,8 @@ useEffect(() => {
     if (name.trim().length < 3) return "الرجاء إدخال الاسم الكامل";
     if (!/^3\d{7}$|^[36]\d{7}$/.test(phone.trim()))
       return "رقم واتساب بحريني غير صحيح (٨ أرقام)";
-    if (!area.trim() || !block.trim() || !street.trim() || !building.trim())
-      return "الرجاء إكمال بيانات العنوان";
+    if (!address.trim()) return "الرجاء إدخال العنوان";
+
     if (!isCash) {
       if (downNum < 50) return "الحد الأدنى للدفعة الأولى هو 50 د.ب";
       if (downNum > total)
@@ -349,24 +342,17 @@ useEffect(() => {
                 </div>
               </label>
 
-              <label className="block">
-                <span className="mb-1 block text-xs font-bold text-muted-foreground">المحافظة</span>
-                <select
-                  value={gov}
-                  onChange={(e) => setGov(e.target.value)}
-                  className="w-full rounded-xl border border-input bg-card px-3 py-2 text-sm outline-none"
-                >
-                  {governorates.map((g) => (
-                    <option key={g}>{g}</option>
-                  ))}
-                </select>
-              </label>
+              <label className="block mb-3">
+  <span className="mb-1 block text-xs font-medium">العنوان بالكامل</span>
+  <textarea
+    value={address}
+    onChange={(e) => setAddress(e.target.value)}
+    placeholder="أدخل المحافظة، المنطقة، الشارع، والمبنى..."
+    className="w-full rounded-xl border border-gray-300 p-3 outline-none"
+    rows={3}
+  />
+</label>
 
-              <div className="grid grid-cols-2 gap-3">
-                <Field label="المنطقة" value={area} onChange={setArea} placeholder="الرفاع" />
-                <Field label="المجمع" value={block} onChange={setBlock} placeholder="928" />
-                <Field label="الشارع" value={street} onChange={setStreet} placeholder="2815" />
-                <Field label="المبنى / الشقة" value={building} onChange={setBuilding} placeholder="1234 / 5" />
                 <Field label="الرقم الشخصي (CPR)" value={cpr} onChange={setCpr} placeholder="اختياري" className="col-span-2" />
               </div>
             </div>
