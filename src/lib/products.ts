@@ -399,7 +399,7 @@ function p(
   };
 }
 
-export const products: Product[] = [
+
 export const products: Product[] = [
     // iPhone 18
     p("ip18-pro-max", "iPhone 18 Pro Max", "iphone", [["256GB", 604], ["512GB", 712], ["1TB", 909]]),
