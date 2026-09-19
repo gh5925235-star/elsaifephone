@@ -400,95 +400,110 @@ function p(
 }
 
 export const products: Product[] = [
-  // iPhone 18
-  p("ip18-pro-max", "iPhone 18 Pro Max", "iphone", [["256GB", 604], ["512GB", 712], ["1TB", 909]]),
-  p("ip18-pro", "iPhone 18 Pro", "iphone", [["256GB", 570], ["512GB", 670], ["1TB", 869]]),
-  p("ip18-plus", "iPhone 18 Plus", "iphone", [["128GB", 519], ["256GB", 569], ["512GB", 659]]),
-  p("ip18", "iPhone 18", "iphone", [["128GB", 469], ["256GB", 519], ["512GB", 609]]),
-  // iPhone 17
-  p("ip17-pro-max", "iPhone 17 Pro Max", "iphone", [["256GB", 649], ["512GB", 749], ["1TB", 869]]),
-  p("ip17-pro", "iPhone 17 Pro", "iphone", [["256GB", 579], ["512GB", 679], ["1TB", 799]]),
-  p("ip17-air", "iPhone 17 Air", "iphone", [["256GB", 509], ["512GB", 609]]),
-  p("ip17", "iPhone 17", "iphone", [["128GB", 419], ["256GB", 469], ["512GB", 559]]),
-  // iPhone 16
-  p("ip16-pro-max", "iPhone 16 Pro Max", "iphone", [["256GB", 579], ["512GB", 669], ["1TB", 779]]),
-  p("ip16-pro", "iPhone 16 Pro", "iphone", [["128GB", 499], ["256GB", 539], ["512GB", 629]]),
-  p("ip16-plus", "iPhone 16 Plus", "iphone", [["128GB", 429], ["256GB", 479]]),
-  p("ip16", "iPhone 16", "iphone", [["128GB", 379], ["256GB", 429], ["512GB", 509]]),
-  // iPhone 15
-  p("ip15-pro-max", "iPhone 15 Pro Max", "iphone", [["256GB", 499], ["512GB", 589]]),
-  p("ip15-pro", "iPhone 15 Pro", "iphone", [["128GB", 439], ["256GB", 479]]),
-  p("ip15-plus", "iPhone 15 Plus", "iphone", [["128GB", 379], ["256GB", 419]]),
-  p("ip15", "iPhone 15", "iphone", [["128GB", 329], ["256GB", 369]]),
-  // iPhone 14 / 13
-  p("ip14-pro-max", "iPhone 14 Pro Max", "iphone", [["128GB", 399], ["256GB", 439]]),
-  p("ip14", "iPhone 14", "iphone", [["128GB", 279], ["256GB", 319]]),
-  p("ip13", "iPhone 13", "iphone", [["128GB", 229], ["256GB", 259]]),
-  // Samsung
-  p("s25-ultra", "Galaxy S25 Ultra", "samsung", [["256GB", 549], ["512GB", 629], ["1TB", 729]]),
-  p("s25-plus", "Galaxy S25+", "samsung", [["256GB", 449], ["512GB", 519]]),
-  p("s25", "Galaxy S25", "samsung", [["128GB", 379], ["256GB", 419]]),
-  p("s24-ultra", "Galaxy S24 Ultra", "samsung", [["256GB", 469], ["512GB", 539]]),
-  p("zfold6", "Galaxy Z Fold 6", "samsung", [["256GB", 689], ["512GB", 769]]),
-  p("zflip6", "Galaxy Z Flip 6", "samsung", [["256GB", 429], ["512GB", 489]]),
-  // Gaming
-  p("ps5-pro", "PlayStation 5 Pro", "gaming", [["2TB", 289]]),
-  p("ps5-slim", "PlayStation 5 Slim", "gaming", [["1TB", 209], ["Digital", 179]]),
-  // Audio
-  p("airpods-pro-3", "AirPods Pro 3", "audio", [["USB-C", 109]]),
-  p("airpods-4-anc", "AirPods 4 (ANC)", "audio", [["USB-C", 79]]),
-  p("airpods-4", "AirPods 4", "audio", [["USB-C", 59]]),
-  p("airpods-max", "AirPods Max", "audio", [["USB-C", 219]]),
-  p("airpods-pro-2", "AirPods Pro 2 (USB-C)", "audio", [["USB-C", 89]]),
-  // آيباد واللوحيات
-  p("ipad-pro-11", 'iPad Pro (M4) 11"', "tablet", [["256GB", 289], ["512GB", 339], ["1TB", 429]]),
-  p("ipad-pro-13", 'iPad Pro (M4) 13"', "tablet", [["256GB", 379], ["512GB", 439], ["1TB", 529]]),
-  p("ipad-air-11", 'iPad Air (M2) 11"', "tablet", [["128GB", 239], ["256GB", 279]]),
-  p("ipad-air-13", 'iPad Air (M2) 13"', "tablet", [["128GB", 319], ["256GB", 359]]),
-  p("ipad-10", "iPad الجيل العاشر", "tablet", [["64GB", 139], ["256GB", 179]]),
-  // الساعات الذكية
-  p("watch-ultra-2", "Apple Watch Ultra 2", "watch", [
-    ["49mm - Trail Loop", 319],
-    ["49mm - Alpine Loop", 329],
-    ["49mm - Ocean Band", 325],
-  ]),
-  p("watch-s10", "Apple Watch Series 10", "watch", [
-    ["42mm ألمنيوم", 165],
-    ["46mm ألمنيوم", 179],
-    ["42mm تيتانيوم", 285],
-    ["46mm تيتانيوم", 299],
-  ]),
-  p("watch-s9", "Apple Watch Series 9", "watch", [["41mm", 149], ["45mm", 169]]),
-  p("gwatch-ultra", "Galaxy Watch Ultra", "watch", [["47mm", 249]]),
-  p("gwatch-7", "Galaxy Watch 7", "watch", [["40mm", 129], ["44mm", 149]]),
-  // ماك بوك ولابتوب
-  p("mba-13", 'MacBook Air (M3) 13"', "laptop", [["256GB", 409], ["512GB", 479]]),
-  p("mba-15", 'MacBook Air (M3) 15"', "laptop", [["256GB", 489], ["512GB", 559]]),
-  p("mbp-14", 'MacBook Pro 14"', "laptop", [["512GB", 749], ["1TB", 899]]),
-  p("mbp-16", 'MacBook Pro 16"', "laptop", [["512GB", 999], ["1TB", 1149]]),
-  // الألعاب
-  p("dualsense", "ذراع تحكم DualSense اللاسلكي", "gaming", [["إصدار قياسي", 26]]),
-  // الإكسسوارات وحزم الشحن
-  p("charger-bundle", "حزمة شاحن سريع + كيبل USB-C مجدول", "accessories", [
-    ["20W", 12],
-    ["35W", 19],
-  ]),
-  p("magsafe-battery", "بطارية MagSafe لاسلكية", "accessories", [["5000mAh", 39]]),
-  // إضافات جديدة
-  p("ipad-mini-6", "iPad mini 6", "tablet", [["64GB", 179], ["256GB", 229]]),
-  p("ipad-9", "iPad الجيل التاسع", "tablet", [["64GB", 119], ["256GB", 159]]),
-  p("watch-se-2", "Apple Watch SE 2", "watch", [["40mm", 99], ["44mm", 119]]),
-  p("gwatch-6-classic", "Galaxy Watch 6 Classic", "watch", [["43mm", 159], ["47mm", 179]]),
-  p("sony-xm5", "Sony WH-1000XM5", "audio", [["إصدار قياسي", 139]]),
-  p("airpods-3", "AirPods 3", "audio", [["Lightning", 65]]),
-  p("mba-13-m2", 'MacBook Air (M2) 13"', "laptop", [["256GB", 349], ["512GB", 419]]),
-  p("mbp-16-max", 'MacBook Pro 16" (M3 Max)', "laptop", [["1TB", 1499], ["2TB", 1699]]),
-  p("switch-oled", "Nintendo Switch OLED", "gaming", [["64GB", 129]]),
-  p("pulse-3d", "سماعة PlayStation Pulse 3D", "gaming", [["إصدار قياسي", 39]]),
-  p("controller-charger", "شاحن يدات تحكم مزدوج", "gaming", [["إصدار قياسي", 25]]),
-  p("car-charger", "شاحن سيارة سريع USB-C", "accessories", [["45W", 15]]),
-  p("magsafe-wallet", "محفظة جلدية MagSafe", "accessories", [["جلد طبيعي", 22]]),
+export const products: Product[] = [
+    // iPhone 18
+    p("ip18-pro-max", "iPhone 18 Pro Max", "iphone", [["256GB", 604], ["512GB", 712], ["1TB", 909]]),
+    p("ip18-pro", "iPhone 18 Pro", "iphone", [["256GB", 559], ["512GB", 659], ["1TB", 789]]),
+    p("ip18-plus", "iPhone 18 Plus", "iphone", [["128GB", 439], ["256GB", 489], ["512GB", 579]]),
+    p("ip18", "iPhone 18", "iphone", [["128GB", 389], ["256GB", 439], ["512GB", 529]]),
+    
+    // iPhone 17
+    p("ip17-pro-max", "iPhone 17 Pro Max", "iphone", [["256GB", 489], ["512GB", 579], ["1TB", 669]]),
+    p("ip17-pro", "iPhone 17 Pro", "iphone", [["256GB", 419], ["512GB", 509], ["1TB", 599]]),
+    p("ip17-air", "iPhone 17 Air", "iphone", [["256GB", 389], ["512GB", 479]]),
+    p("ip17", "iPhone 17", "iphone", [["128GB", 329], ["256GB", 369], ["512GB", 449]]),
+    
+    // iPhone 16
+    p("ip16-pro-max", "iPhone 16 Pro Max", "iphone", [["256GB", 479], ["512GB", 569], ["1TB", 659]]),
+    p("ip16-pro", "iPhone 16 Pro", "iphone", [["128GB", 389], ["256GB", 429], ["512GB", 509]]),
+    p("ip16-plus", "iPhone 16 Plus", "iphone", [["128GB", 329], ["256GB", 379]]),
+    p("ip16", "iPhone 16", "iphone", [["128GB", 299], ["256GB", 339], ["512GB", 419]]),
+    
+    // iPhone 15
+    p("ip15-pro-max", "iPhone 15 Pro Max", "iphone", [["256GB", 449], ["512GB", 529]]),
+    p("ip15-pro", "iPhone 15 Pro", "iphone", [["128GB", 359], ["256GB", 399]]),
+    p("ip15-plus", "iPhone 15 Plus", "iphone", [["128GB", 299], ["256GB", 339]]),
+    p("ip15", "iPhone 15", "iphone", [["128GB", 259], ["256GB", 299]]),
+    
+    // iPhone 14 / 13
+    p("ip14-pro-max", "iPhone 14 Pro Max", "iphone", [["128GB", 349], ["256GB", 389]]),
+    p("ip14", "iPhone 14", "iphone", [["128GB", 219], ["256GB", 249]]),
+    p("ip13", "iPhone 13", "iphone", [["128GB", 189], ["256GB", 219]]),
+    
+    // Samsung[span_2](start_span)[span_2](end_span)
+    p("s25-ultra", "Galaxy S25 Ultra", "samsung", [["256GB", 489], ["512GB", 569], ["1TB", 659]]),
+    p("s25-plus", "Galaxy S25+", "samsung", [["256GB", 379], ["512GB", 439]]),
+    p("s25", "Galaxy S25", "samsung", [["128GB", 319], ["256GB", 349]]),
+    p("s24-ultra", "Galaxy S24 Ultra", "samsung", [["256GB", 399], ["512GB", 459]]),
+    p("zfold6", "Galaxy Z Fold 6", "samsung", [["256GB", 589], ["512GB", 639]]),
+    p("zflip6", "Galaxy Z Flip 6", "samsung", [["256GB", 389], ["512GB", 429]]),
+
+    // Gaming[span_3](start_span)[span_3](end_span)
+    p("ps5-pro", "PlayStation 5 Pro", "gaming", [["2TB", 329]]),
+    p("ps5-slim", "PlayStation 5 Slim", "gaming", [["1TB", 179]]),
+
+    // Audio[span_4](start_span)[span_4](end_span)
+    p("airpods-pro-3", "AirPods Pro 3", "audio", [["USB-C", 99]]),
+    p("airpods-4-anc", "AirPods 4 (ANC)", "audio", [["USB-C", 75]]),
+    p("airpods-4", "AirPods 4", "audio", [["USB-C", 55]]),
+    p("airpods-max", "AirPods Max", "audio", [["USB-C", 209]]),
+    p("airpods-pro-2", "AirPods Pro 2 (USB-C)", "audio", [["USB-C", 85]]),
+
+    // أيباد واللوحيات[span_5](start_span)[span_5](end_span)
+    p("ipad-pro-11", "iPad Pro (M4) 11\"", "tablet", [["256GB", 419], ["512GB", 499]]),
+    p("ipad-pro-13", "iPad Pro (M4) 13\"", "tablet", [["256GB", 549], ["512GB", 629]]),
+    p("ipad-air-11", "iPad Air (M2) 11\"", "tablet", [["128GB", 249], ["256GB", 299]]),
+    p("ipad-air-13", "iPad Air (M2) 13\"", "tablet", [["128GB", 329], ["256GB", 379]]),
+    p("ipad-10", "iPad الجيل العاشر", "tablet", [["64GB", 139], ["256GB", 199]]),
+
+    // الساعات الذكية[span_6](start_span)[span_6](end_span)
+    p("watch-ultra-2", "Apple Watch Ultra 2", "watch", [
+        ["49mm - Trail Loop", 319],
+        ["49mm - Alpine Loop", 329],
+        ["49mm - Ocean Band", 325],
+    ]),
+    p("watch-s10", "Apple Watch Series 10", "watch", [
+        ["42mm ألمنيوم", 165],
+        ["46mm ألمنيوم", 179],
+        ["42mm تيتانيوم", 285],
+        ["46mm تيتانيوم", 299],
+    ]),
+    p("watch-s9", "Apple Watch Series 9", "watch", [["41mm", 145], ["45mm", 159]]),
+    p("gwatch-ultra", "Galaxy Watch Ultra", "watch", [["47mm", 249]]),
+    p("gwatch-7", "Galaxy Watch 7", "watch", [["40mm", 119], ["44mm", 135]]),
+
+    // ماك بوك ولابتوب[span_7](start_span)[span_7](end_span)
+    p("mba-13", "MacBook Air (M3) 13\"", "laptop", [["256GB", 429], ["512GB", 509]]),
+    p("mba-15", "MacBook Air (M3) 15\"", "laptop", [["256GB", 519], ["512GB", 599]]),
+    p("mbp-14", "MacBook Pro 14\"", "laptop", [["512GB", 649], ["1TB", 729]]),
+    p("mbp-16", "MacBook Pro 16\"", "laptop", [["512GB", 999], ["1TB", 1150]]),
+
+    // الألعاب[span_8](start_span)[span_8](end_span)
+    p("dualsense", "ذراع تحكم DualSense اللاسلكي", "gaming", [["إصدار قياسي", 26]]),
+    
+    // الإكسسوارات وحزم الشحن[span_9](start_span)[span_9](end_span)
+    p("charger-bundle", "حزمة شاحن سريع + كيبل USB-C", "accessories", [
+        ["20W", 12],
+        ["35W", 19],
+    ]),
+    p("magsafe-battery", "بطارية MagSafe لاسلكية", "accessories", [["5000mAh", 39]]),
+
+    // إضافات جديدة[span_10](start_span)[span_10](end_span)
+    p("ipad-mini-6", "iPad mini 6", "tablet", [["64GB", 179], ["256GB", 229]]),
+    p("ipad-9", "iPad الجيل التاسع", "tablet", [["64GB", 119], ["256GB", 159]]),
+    p("watch-se-2", "Apple Watch SE 2", "watch", [["40mm", 99], ["44mm", 119]]),
+    p("gwatch-6-classic", "Galaxy Watch 6 Classic", "watch", [["43mm", 159], ["47mm", 179]]),
+    p("sony-xm5", "Sony WH-1000XM5", "audio", [["إصدار قياسي", 139]]),
+    p("airpods-3", "AirPods 3", "audio", [["Lightning", 65]]),
+    p("mba-13-m2", "MacBook Air (M2) 13\"", "laptop", [["256GB", 349], ["512GB", 419]]),
+    p("mbp-16-max", "MacBook Pro 16\" (M3 Max)", "laptop", [["1TB", 1499], ["2TB", 1699]]),
+    p("switch-oled", "Nintendo Switch OLED", "gaming", [["64GB", 129]]),
+    p("pulse-3d", "سماعة PlayStation Pulse 3D", "gaming", [["إصدار قياسي", 39]]),
+    p("controller-charger", "شاحن يداة تحكم مزدوج", "gaming", [["إصدار قياسي", 25]]),
+    p("car-charger", "شاحن سيارة سريع USB-C", "accessories", [["45W", 15]]),
+    p("magsafe-wallet", "محفظة جلدية MagSafe", "accessories", [["جلد طبيعي", 22]])
 ];
+
 
 export const bhd = (n: number) =>
   `${n.toLocaleString("en-US", { minimumFractionDigits: 3, maximumFractionDigits: 3 })} د.ب`;
