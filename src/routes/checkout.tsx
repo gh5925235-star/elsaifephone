@@ -353,10 +353,10 @@ useEffect(() => {
   />
 </label>
 
-                <Field label="الرقم الشخصي (CPR)" value={cpr} onChange={setCpr} placeholder="اختياري" className="col-span-2" />
-              </div>
-            </div>
-          </section>
+<Field label="الرقم الشخصي (CPR)" value={cpr} onChange={setCpr} />
+</div>
+</section>
+
 
           {isCash ? (
             <section className="rounded-2xl border border-border bg-card p-5 shadow-soft">
