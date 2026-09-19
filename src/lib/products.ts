@@ -401,8 +401,8 @@ function p(
 
 export const products: Product[] = [
   // iPhone 18
-  p("ip18-pro-max", "iPhone 18 Pro Max", "iphone", [["256GB", 749], ["512GB", 849], ["1TB", 969]]),
-  p("ip18-pro", "iPhone 18 Pro", "iphone", [["256GB", 679], ["512GB", 779], ["1TB", 899]]),
+  p("ip18-pro-max", "iPhone 18 Pro Max", "iphone", [["256GB", 604], ["512GB", 712], ["1TB", 909]]),
+  p("ip18-pro", "iPhone 18 Pro", "iphone", [["256GB", 570], ["512GB", 670], ["1TB", 869]]),
   p("ip18-plus", "iPhone 18 Plus", "iphone", [["128GB", 519], ["256GB", 569], ["512GB", 659]]),
   p("ip18", "iPhone 18", "iphone", [["128GB", 469], ["256GB", 519], ["512GB", 609]]),
   // iPhone 17
