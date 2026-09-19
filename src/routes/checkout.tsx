@@ -258,15 +258,18 @@ function handleWhatsAppOrder() {
         });
     }
 
-    // تجهيز الرسالة
+        // تجهيز الرسالة
     const message = `مرحباً، أود إتمام طلبي عبر الواتساب.
 وهذه بيانات الطلب:
 - رقم الطلب: ${orderId ?? "-"}
 - الاسم: ${name}
 - العنوان: ${address}
+- الجهاز والسعة: ${device}
+- اللون: ${cartColors || "-"}
 - الإجمالي: ${total} د.ب
 - الدفعة الأولى: ${downNum} د.ب
 - مدة الأقساط: ${months} شهر`;
+
 
     // استخدام المتغير الديناميكي المرتبط بلوحة التحكم
     window.open(`https://wa.me/${supportDigits}?text=${encodeURIComponent(message)}`, '_blank');
