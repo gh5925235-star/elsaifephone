@@ -237,14 +237,42 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
 
   const updateOrder = useCallback(
-    (id: string, patch: Partial<Order>) => {
-      setOrders((prev) => {
-        const next = prev.map((o) => (o.id === id ? { ...o, ...patch } : o));
-        try {
-          localStorage.setItem(ORDERS_KEY, JSON.stringify(next));
-        } catch {
-          /* ignore */
-        }
+  async (id: string, patch: Partial<Order>) => {
+    // 1. تحديث الواجهة فوراً (الحفظ المحلي)
+    setOrders((prev) => {
+      const next = prev.map((o) => (o.id === id ? { ...o, ...patch } : o));
+      try {
+        localStorage.setItem(ORDERS_KEY, JSON.stringify(next));
+      } catch {
+        /* ignore */
+      }
+      return next;
+    });
+
+    // 2. إرسال التعديل إلى قاعدة بيانات Supabase
+    try {
+      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+
+      if (supabaseUrl && supabaseKey) {
+        await fetch(`${supabaseUrl}/rest/v1/elsaifephone-orders?id=eq.${id}`, {
+          method: 'PATCH', // نستخدم PATCH لتحديث الحقول المحددة فقط
+          headers: {
+            'apikey': supabaseKey,
+            'Authorization': `Bearer ${supabaseKey}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(patch) // سيتم إرسال التاريخ وأي حقل آخر يتم تعديله
+        });
+      }
+    } catch (err) {
+      console.error("خطأ في الاتصال بقاعدة البيانات:", err);
+    }
+  },
+  []
+);
+
         return next;
       });
     },
