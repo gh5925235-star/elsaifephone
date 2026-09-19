@@ -248,6 +248,7 @@ useEffect(() => {
 • الإجمالي: ${total.toFixed(3)} د.ب`,
     );
     window.open(`${settings.deliveryFeeUrl}?amount=2`, "_blank");
+    } 
 function handleWhatsAppOrder() {
     // تحديث حالة الطلب في لوحة التحكم
     if (orderId) {
