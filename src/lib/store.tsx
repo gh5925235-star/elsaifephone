@@ -273,11 +273,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   []
 );
 
-        return next;
-      });
-    },
-    [],
-  );
+        
 
   const deleteOrder = useCallback(
     (id: string) => persistOrders(orders.filter((o) => o.id !== id)),
