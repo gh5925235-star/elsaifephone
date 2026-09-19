@@ -264,15 +264,18 @@ function OrdersTab() {
             device: item.cart_items || "غير محدد",
             storage: "",
             color: "",
-            total: Number(item.total_price) || 0,
-            down: 0,
-            months: 0,
-            monthly: 0,
-            method: "طلب من الموقع",
-            status: "طلب جديد", // دي الخانة اللي كانت ناقصة وعملت المشكلة
-            cpr: "غير محدد",
-            purchaseMode: "cash",
-            receiptImage: null
+                    total: Number(item.total_price) || 0,
+        
+        // التعديلات الجديدة لربط الأقساط بقاعدة البيانات:
+        down: Number(item.down_payment) || 0,
+        months: Number(item.months_count) || 0,
+        monthly: Number(item.monthly_installment) || 0,
+        method: "طلب من الموقع",
+        status: "طلب جديد",
+        cpr: "غير محدد",
+        purchaseMode: item.purchase_type || "cash", // سحب نوع الشراء الحقيقي
+        receiptImage: null
+
           }));
           setOrders(formatted);
         }
