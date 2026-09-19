@@ -361,38 +361,35 @@ function OrdersTab() {
           {o.purchaseMode !== "cash" && o.months > 0 && (
             <div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-gold bg-surface p-3">
               <label className="text-[11px] font-extrabold">تاريخ بدء أول قسط</label>
-              <input
+          <input
   type="date"
   defaultValue={o.firstInstallmentDate ?? ""}
   onChange={async (e) => {
     const newDate = e.target.value;
     
-    // 1. تحديث الواجهة أمامك فوراً عشان الخانة متفضلش فاضية
+    // 1. تحديث الشاشة فوراً
     updateOrder(o.id, { firstInstallmentDate: newDate });
 
-    // 2. إرسال التاريخ مباشرة إلى Supabase بدون انتظار
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-    
-    if (supabaseUrl && supabaseKey) {
-      try {
-        await fetch(`${supabaseUrl}/rest/v1/elsaifephone-orders?id=eq.${o.id}`, {
-          method: 'PATCH',
-          headers: {
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify({ firstInstallmentDate: newDate })
-        });
-      } catch (err) {
-        console.error("فشل إرسال التاريخ:", err);
+    // 2. الحفظ المباشر والقوي في Supabase
+    try {
+      // بنستخدم عميل supabase الجاهز في ملفك
+      const { error } = await supabase
+        .from('elsaifephone-orders')
+        .update({ firstInstallmentDate: newDate })
+        .eq('id', o.id);
+
+      if (error) {
+        console.error("فشل الحفظ في سوبابيز:", error);
+      } else {
+        console.log("تم حفظ التاريخ بنجاح في القاعدة!");
       }
+    } catch (err) {
+      console.error("خطأ في الاتصال:", err);
     }
   }}
   className="rounded-xl border border-input bg-card px-3 py-2 text-[11px] font-bold outline-none"
 />
+
 
             </div>
           )}
