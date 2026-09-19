@@ -148,12 +148,19 @@ useEffect(() => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        customer_name: name,
-        phone: phone,
-        address: address,
-        cart_items: `${device} - ${storages} - ${chosenColor}`,
-        total_price: isCash ? cashTotal : total
-      })
+    customer_name: name,
+    phone: phone,
+    address: address,
+    cart_items: `${device} - ${storages} - ${chosenColor === "-" ? "" : chosenColor}`,
+    total_price: isCash ? cashTotal : total,
+    
+    // الأعمدة الجديدة التي تمت إضافتها إلى Supabase
+    down_payment: isCash ? cashTotal : downNum,
+    months_count: isCash ? 0 : months,
+    monthly_installment: isCash ? 0 : monthly,
+    purchase_type: mode
+})
+
     }).catch(err => console.log(err));
 
     setOrderId(order.id);
