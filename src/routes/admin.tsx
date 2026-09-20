@@ -371,25 +371,29 @@ function OrdersTab() {
     // 1. تحديث الشاشة فوراً
     updateOrder(o.id, { firstInstallmentDate: newDate });
 
-    // 2. الحفظ المباشر والقوي في Supabase
+    // 2. كود الفحص الجديد لاكتشاف سبب عدم الحفظ
     try {
-      // بنستخدم عميل supabase الجاهز في ملفك
-      const { error } = await supabase
-        .from('elsaifephone-orders')
+      // ⚠️ تأكد إن 'elsaifephone-orders' هو نفس اسم الجدول عندك بالظبط
+      const { data, error } = await supabase
+        .from('elsaifephone-orders') 
         .update({ firstInstallmentDate: newDate })
-        .eq('id', o.id);
+        .eq('id', o.id)
+        .select();
 
       if (error) {
         console.error("فشل الحفظ في سوبابيز:", error);
+      } else if (data && data.length === 0) {
+        console.warn("فشل صامت: لم يتم العثور على الطلب! الـ ID المستخدم هو:", o.id);
       } else {
-        console.log("تم حفظ التاريخ بنجاح في القاعدة!");
+        console.log("تم الحفظ الفعلي بنجاح! البيانات:", data);
       }
     } catch (err) {
-      console.error("خطأ في الاتصال:", err);
+      console.error("خطأ عام:", err);
     }
   }}
   className="rounded-xl border border-input bg-card px-3 py-2 text-[11px] font-bold outline-none"
 />
+
 
 
             </div>
