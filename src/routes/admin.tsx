@@ -507,7 +507,7 @@ function EditOrderModal({
   onClose: () => void;
   onSave: (id: string, f: Order) => void;
 }) {
-
+  const [f, setF] = useState<Order>(order);
   const num = (k: keyof Order, label: string) => (
     <label className="block">
       <span className="mb-1 block text-xs font-bold text-muted-foreground">{label}</span>
