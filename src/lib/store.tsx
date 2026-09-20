@@ -16,6 +16,7 @@ import type {
   StoreFilter,
 } from "./store-types";
 import { discountedPrice } from "./store-types";
+import { supabase } from "./supabase"; // تم إضافة الاستدعاء هنا
 
 export type {
   AdminSettings,
@@ -35,9 +36,8 @@ const defaultSettings: AdminSettings = {
   iban: "",
   storePhone: "+973 XXXXXXXX",
   storeEmail: "support@alsaifphones.com",
-telegramToken: import.meta.env.VITE_TELEGRAM_TOKEN || "",
-telegramChatId: import.meta.env.VITE_TELEGRAM_CHAT_ID || "",
-  
+  telegramToken: import.meta.env.VITE_TELEGRAM_TOKEN || "",
+  telegramChatId: import.meta.env.VITE_TELEGRAM_CHAT_ID || "",
   globalDiscount: 0,
 };
 
@@ -77,7 +77,6 @@ type Ctx = {
   user: AppUser | null;
   signInUser: (email: string, password: string) => void;
   signOutUser: () => void;
-
 };
 
 const StoreContext = createContext<Ctx | null>(null);
@@ -90,7 +89,6 @@ const AUTH_KEY = "taj-admin-auth";
 const USER_KEY = "taj-user";
 const USERS_KEY = "taj-users";
 
-
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [open, setOpen] = useState(false);
@@ -100,7 +98,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [filter, setFilter] = useState<StoreFilter>(defaultFilter);
   const [isAdmin, setIsAdmin] = useState(false);
   const [user, setUser] = useState<AppUser | null>(null);
-
 
   useEffect(() => {
     try {
@@ -121,11 +118,36 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         const missing = defaultProducts.filter((d) => !saved.some((s) => s.id === d.id));
         setCatalog([...missing, ...merged]);
       }
+      
       const o = localStorage.getItem(ORDERS_KEY);
       if (o) setOrders(JSON.parse(o));
+      
       if (sessionStorage.getItem(AUTH_KEY) === "true") setIsAdmin(true);
       const u = localStorage.getItem(USER_KEY);
       if (u) setUser(JSON.parse(u));
+
+      // جلب الطلبات الفعلية من قاعدة البيانات لضمان عدم اختفاء التعديلات
+      const fetchOrdersFromDB = async () => {
+        try {
+          const { data, error } = await supabase
+            .from('elsaifephone-orders')
+            .select('*');
+
+          if (data && !error && data.length > 0) {
+            setOrders((prev) => {
+              // دمج البيانات لحفظ الطلبات الجديدة والقادمة من القاعدة معاً
+              const dbIds = new Set(data.map((d) => String(d.id)));
+              const localOnly = prev.filter((o) => !dbIds.has(String(o.id)));
+              const merged = [...data, ...localOnly];
+              localStorage.setItem(ORDERS_KEY, JSON.stringify(merged));
+              return merged;
+            });
+          }
+        } catch (err) {
+          console.error("خطأ في جلب البيانات:", err);
+        }
+      };
+      fetchOrdersFromDB();
 
     } catch {
       /* ignore */
@@ -237,43 +259,34 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   );
 
   const updateOrder = useCallback(
-  async (id: string, patch: Partial<Order>) => {
-    // 1. تحديث الواجهة فوراً (الحفظ المحلي)
-    setOrders((prev) => {
-      const next = prev.map((o) => (o.id === id ? { ...o, ...patch } : o));
+    async (id: string, patch: Partial<Order>) => {
+      // 1. تحديث الواجهة فوراً (الحفظ المحلي)
+      setOrders((prev) => {
+        const next = prev.map((o) => (o.id === id ? { ...o, ...patch } : o));
+        try {
+          localStorage.setItem(ORDERS_KEY, JSON.stringify(next));
+        } catch {
+          /* ignore */
+        }
+        return next;
+      });
+
+      // 2. إرسال التعديل إلى قاعدة بيانات Supabase (تم التصحيح هنا)
       try {
-        localStorage.setItem(ORDERS_KEY, JSON.stringify(next));
-      } catch {
-        /* ignore */
+        const { error } = await supabase
+          .from('elsaifephone-orders')
+          .update(patch)
+          .eq('id', id);
+
+        if (error) {
+          console.error("فشل التحديث في القاعدة:", error);
+        }
+      } catch (err) {
+        console.error("خطأ في الاتصال بقاعدة البيانات:", err);
       }
-      return next;
-    });
-
-    // 2. إرسال التعديل إلى قاعدة بيانات Supabase
-    try {
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-      const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
-
-      if (supabaseUrl && supabaseKey) {
-        await fetch(`${supabaseUrl}/rest/v1/elsaifephone-orders?id=eq.${id}`, {
-          method: 'PATCH', // نستخدم PATCH لتحديث الحقول المحددة فقط
-          headers: {
-            'apikey': supabaseKey,
-            'Authorization': `Bearer ${supabaseKey}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=minimal'
-          },
-          body: JSON.stringify(patch) // سيتم إرسال التاريخ وأي حقل آخر يتم تعديله
-        });
-      }
-    } catch (err) {
-      console.error("خطأ في الاتصال بقاعدة البيانات:", err);
-    }
-  },
-  []
-);
-
-        
+    },
+    []
+  );
 
   const deleteOrder = useCallback(
     (id: string) => persistOrders(orders.filter((o) => o.id !== id)),
@@ -327,7 +340,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-
   const total = useMemo(
     () => items.reduce((sum, i) => sum + i.price * i.qty, 0),
     [items],
@@ -365,7 +377,6 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         user,
         signInUser,
         signOutUser,
-
       }}
     >
       {children}
