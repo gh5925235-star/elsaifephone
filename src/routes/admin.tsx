@@ -259,6 +259,8 @@ function OrdersTab() {
           const formatted = data.map(item => ({
             id: String(item.id || "0"),
             created_at: item.created_at || new Date().toISOString(),
+            createdAt: item.created_at || new Date().toISOString(),
+firstInstallmentDate: item.firstInstallmentDate || item.first_installment_date || "",
             name: item.customer_name || "غير محدد",
             phone: String(item.phone || "غير محدد"),
             address: item.address || "غير محدد",
