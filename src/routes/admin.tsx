@@ -290,7 +290,23 @@ firstInstallmentDate: item.firstInstallmentDate || item.first_installment_date |
       });
   }, []);
 
-
+const saveEdit = async (id: string, f: any) => {
+  setOrders((prev) => prev.map((x) => (x.id === id ? { ...x, ...f } : x)));
+  const { error } = await supabase
+    .from('elsaifephone-orders')
+    .update({
+      customer_name: f.name,
+      phone: f.phone,
+      address: f.address,
+      cart_items: f.device,
+      total_price: String(f.total),
+      down_payment: f.down,
+      months_count: f.months,
+      monthly_installment: f.monthly,
+    })
+    .eq('id', id);
+  if (error) console.error("فشل حفظ التعديل:", error);
+};
   if (loading) {
     return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
   }
@@ -456,7 +472,7 @@ firstInstallmentDate: item.firstInstallmentDate || item.first_installment_date |
       {doc && (
         <PrintModal order={doc.order} type={doc.type} onClose={() => setDoc(null)} />
       )}
-      {edit && <EditOrderModal order={edit} onClose={() => setEdit(null)} />}
+      {edit && <EditOrderModal order={edit} onClose={() => setEdit(null)} onSave={saveEdit} />}
       {receipt && (
         <div
           onClick={() => setReceipt(null)}
@@ -482,9 +498,15 @@ function Cell({ k, v }: { k: string; v: string }) {
   );
 }
 
-function EditOrderModal({ order, onClose }: { order: Order; onClose: () => void }) {
-  const { updateOrder } = useStore();
-  const [f, setF] = useState<Order>(order);
+function EditOrderModal({
+  order,
+  onClose,
+  onSave,
+}: {
+  order: Order;
+  onClose: () => void;
+  onSave: (id: string, f: Order) => void;
+}) {
 
   const num = (k: keyof Order, label: string) => (
     <label className="block">
@@ -530,9 +552,11 @@ function EditOrderModal({ order, onClose }: { order: Order; onClose: () => void 
           <button
             onClick={() => {
               const monthly =
-                f.months > 0 ? Math.max(f.total - f.down, 0) / f.months : f.monthly;
-              updateOrder(order.id, { ...f, monthly });
-              onClose();
+  f.months > 0
+    ? Math.round((Math.max(f.total - f.down, 0) / f.months) * 1000) / 1000
+    : f.monthly;
+onSave(order.id, { ...f, monthly });
+onClose();
             }}
             className="flex-1 rounded-xl bg-gold-gradient py-3 text-xs font-extrabold text-primary-foreground"
           >
