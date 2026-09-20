@@ -372,6 +372,9 @@ firstInstallmentDate: item.firstInstallmentDate || item.first_installment_date |
     
     // 1. تحديث الشاشة فوراً
     updateOrder(o.id, { firstInstallmentDate: newDate });
+    setOrders((prev) =>
+  prev.map((x) => (x.id === o.id ? { ...x, firstInstallmentDate: newDate } : x))
+);
 
     // 2. كود الفحص الجديد لاكتشاف سبب عدم الحفظ
     try {
