@@ -307,6 +307,19 @@ const saveEdit = async (id: string, f: any) => {
     .eq('id', id);
   if (error) console.error("فشل حفظ التعديل:", error);
 };
+  const removeOrder = async (id: string) => {
+  const { data, error } = await supabase
+    .from('elsaifephone-orders')
+    .delete()
+    .eq('id', id)
+    .select();
+  if (error || !data || data.length === 0) {
+    console.error("فشل الحذف:", error);
+    alert("فشل الحذف من قاعدة البيانات");
+    return;
+  }
+  setOrders((prev) => prev.filter((x) => x.id !== id));
+};
   if (loading) {
     return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
   }
@@ -459,7 +472,7 @@ const saveEdit = async (id: string, f: any) => {
             </button>
             <button
               onClick={() => {
-                if (confirm("حذف هذا الطلب نهائياً؟")) deleteOrder(o.id);
+                if (confirm("حذف هذا الطلب نهائياً؟")) removeOrder(o.id);
               }}
               className="rounded-xl border border-destructive px-3 py-2 text-[11px] font-bold text-destructive"
             >
