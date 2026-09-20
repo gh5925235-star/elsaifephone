@@ -240,7 +240,7 @@ function waLink(o: Order) {
 
 function OrdersTab() {
   // شلنا كلمة orders القديمة عشان هنجيبها من الداتا بيز الجديدة
-  const { updateOrder, deleteOrder } = useStore();
+  const { updateOrder } = useStore();
   const [doc, setDoc] = useState<any>(null);
   const [edit, setEdit] = useState<any>(null);
   const [receipt, setReceipt] = useState<string | null>(null);
