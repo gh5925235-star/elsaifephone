@@ -138,7 +138,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
               // دمج البيانات لحفظ الطلبات الجديدة والقادمة من القاعدة معاً
               const dbIds = new Set(data.map((d) => String(d.id)));
               const localOnly = prev.filter((o) => !dbIds.has(String(o.id)));
-              const merged = [...data, ...localOnly];
+              const fixed = data.map((d) => ({ ...d, createdAt: d.created_at }));
+const merged = [...fixed, ...localOnly];
               localStorage.setItem(ORDERS_KEY, JSON.stringify(merged));
               return merged;
             });
