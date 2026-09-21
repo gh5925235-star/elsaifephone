@@ -184,4 +184,37 @@
     size: A4 portrait;
     margin: 8mm 10mm;
   }
+  @media print {
+  /* 1. إخفاء كل عناصر الموقع الأساسية من الطباعة */
+  body * {
+    visibility: hidden;
+  }
+
+  /* 2. إظهار منطقة الطباعة فقط (الفاتورة/العقد) وما بداخلها */
+  #print-area, #print-area * {
+    visibility: visible;
+  }
+
+  /* 3. سحب الفاتورة لتكون في أعلى الصفحة وإلغاء أي مسافات بيضاء */
+  #print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* 4. تحديد مقاس الورقة A4 وإزالة الهوامش اللي بتعمل صفحات إضافية */
+  @page {
+    size: A4 portrait;
+    margin: 1cm; /* هامش بسيط عشان الطباعة تكون شيك */
+  }
+
+  /* 5. منع تقطيع الجداول أو النصوص بين صفحتين */
+  table, tr, td, th, p {
+    page-break-inside: avoid;
+  }
+}
+
 }
