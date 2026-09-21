@@ -185,39 +185,8 @@
     margin: 8mm 10mm;
   }
 
-@media print {
-  /* 1. إخفاء كل شيء في الصفحة */
-  body * {
-    visibility: hidden;
+/* إخفاء باقي عناصر الصفحة تماماً بدون ما تاخد مساحة */
+  body *:not(#print-area):not(#print-area *):not(:has(#print-area)) {
+    display: none !important;
   }
-
-  /* 2. دي الضربة القاضية: تصفير ارتفاع الموقع بالكامل عشان نقتل الـ 57 صفحة الفاضية */
-  body > div {
-    height: 0 !important;
-    overflow: hidden !important;
-    position: static !important;
-  }
-
-  /* 3. إظهار الفاتورة فقط وسحبها لتتصدر الورقة بالكامل */
-  #print-area, #print-area * {
-    visibility: visible;
-  }
-
-  #print-area {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  /* 4. تظبيط الورقة مقاس A4 */
-  @page {
-    size: auto;
-    margin: 10mm;
-  }
-}
-
-
 }
