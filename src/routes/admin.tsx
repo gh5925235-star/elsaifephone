@@ -400,15 +400,17 @@ const removeSelected = async () => {
       {shown.map((o) => (
         <article
           key={o.id}
+          className="rounded-2xl border border-border bg-card p-4 shadow-soft"
+        >
           <label className="mb-2 flex items-center gap-2 text-[11px] font-bold">
-  <input
-    type="checkbox"
-    checked={selected.includes(o.id)}
-    onChange={() => toggleOne(o.id)}
-    className="h-4 w-4"
-  />
-  تحديد للحذف
-</label>
+            <input
+              type="checkbox"
+              checked={selected.includes(o.id)}
+              onChange={() => toggleOne(o.id)}
+              className="h-4 w-4"
+            />
+            تحديد للحذف
+          </label>
           className="rounded-2xl border border-border bg-card p-4 shadow-soft"
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
