@@ -411,8 +411,7 @@ const removeSelected = async () => {
             />
             تحديد للحذف
           </label>
-          className="rounded-2xl border border-border bg-card p-4 shadow-soft"
-        >
+          
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="text-xs font-bold text-muted-foreground">
