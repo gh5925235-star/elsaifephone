@@ -248,6 +248,8 @@ function OrdersTab() {
   // المتغيرات اللي هتشيل بيانات Supabase
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+const [selected, setSelected] = useState<string[]>([]);
  
   // الكود اللي بيكلم الداتا بيز أول ما اللوحة تفتح
   useEffect(() => {
@@ -320,6 +322,39 @@ const saveEdit = async (id: string, f: any) => {
   }
   setOrders((prev) => prev.filter((x) => x.id !== id));
 };
+  const q = search.trim().toLowerCase();
+const shown = orders.filter(
+  (o) =>
+    !q ||
+    String(o.name).toLowerCase().includes(q) ||
+    String(o.phone).includes(q) ||
+    String(o.id).includes(q),
+);
+
+const toggleOne = (id: string) =>
+  setSelected((prev) =>
+    prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+  );
+
+const allSelected = shown.length > 0 && shown.every((o) => selected.includes(o.id));
+const toggleAll = () => setSelected(allSelected ? [] : shown.map((o) => o.id));
+
+const removeSelected = async () => {
+  if (selected.length === 0) return;
+  if (!confirm(`حذف ${selected.length} طلب نهائياً؟ لا يمكن التراجع.`)) return;
+  const { data, error } = await supabase
+    .from('elsaifephone-orders')
+    .delete()
+    .in('id', selected)
+    .select();
+  if (error || !data || data.length === 0) {
+    console.error("فشل الحذف:", error);
+    alert("فشل الحذف من قاعدة البيانات");
+    return;
+  }
+  setOrders((prev) => prev.filter((x) => !selected.includes(x.id)));
+  setSelected([]);
+};
   if (loading) {
     return <p className="text-center mt-10 font-bold">جاري تحميل الطلبات من قاعدة البيانات...</p>;
   }
@@ -335,13 +370,45 @@ const saveEdit = async (id: string, f: any) => {
   return (
     <div className="space-y-4">
 
-
+<div className="space-y-2 rounded-2xl border border-border bg-card p-3 shadow-soft">
+  <input
+    value={search}
+    onChange={(e) => setSearch(e.target.value)}
+    placeholder="🔍 ابحث بالاسم أو رقم الهاتف أو رقم الطلب"
+    className="w-full rounded-xl border border-input bg-card px-3 py-2 text-sm outline-none focus:border-gold"
+  />
+  <div className="flex flex-wrap items-center gap-2">
+    <button
+      onClick={toggleAll}
+      className="rounded-xl border border-border bg-surface px-3 py-2 text-[11px] font-bold"
+    >
+      {allSelected ? "إلغاء التحديد" : "☑️ تحديد الكل"}
+    </button>
+    <button
+      onClick={removeSelected}
+      disabled={selected.length === 0}
+      className="rounded-xl border border-destructive px-3 py-2 text-[11px] font-bold text-destructive disabled:opacity-40"
+    >
+      🗑️ حذف المحدد ({selected.length})
+    </button>
+    <span className="text-[11px] text-muted-foreground">{shown.length} طلب</span>
+  </div>
+</div>
      
 
 
-      {orders.map((o) => (
+      {shown.map((o) => (
         <article
           key={o.id}
+          <label className="mb-2 flex items-center gap-2 text-[11px] font-bold">
+  <input
+    type="checkbox"
+    checked={selected.includes(o.id)}
+    onChange={() => toggleOne(o.id)}
+    className="h-4 w-4"
+  />
+  تحديد للحذف
+</label>
           className="rounded-2xl border border-border bg-card p-4 shadow-soft"
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
