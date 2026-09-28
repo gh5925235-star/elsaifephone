@@ -371,6 +371,14 @@ const colorSets: Record<string, ColorOption[]> = {
   "sony-xm5": sonyColors,
   "mba-13-m2": mbaColors,
   "mbp-16-max": mbpColors,
+  "s26-ultra": [
+    { name: "بنفسجي غامق", hex: "#4B3A6B", image: samsungImg },
+    { name: "أزرق سماوي", hex: "#87CEEB", image: samsungImg },
+    { name: "أسود", hex: "#111111", image: samsungImg },
+    { name: "أبيض", hex: "#F5F5F5", image: samsungImg },
+    { name: "ذهبي وردي", hex: "#E8C4B0", image: samsungImg },
+  ],
+
 };
 
 function colorsFor(id: string, category: Category): ColorOption[] | undefined {
@@ -431,6 +439,9 @@ export const products: Product[] = [
     p("ip13", "iPhone 13", "iphone", [["128GB", 189], ["256GB", 219]]),
     
     // Samsung[span_2](start_span)[span_2](end_span)
+  p("s26-ultra", "Galaxy S26 Ultra", "samsung", [["256GB", 325], ["512GB", 530], ["1TB", 740]]),
+  p("s26-plus", "Galaxy S26+", "samsung", [["256GB", 315], ["512GB", 470]]),
+  p("s26", "Galaxy S26", "samsung", [["128GB", 250], ["256GB", 305]]),
     p("s25-ultra", "Galaxy S25 Ultra", "samsung", [["256GB", 489], ["512GB", 569], ["1TB", 659]]),
     p("s25-plus", "Galaxy S25+", "samsung", [["256GB", 379], ["512GB", 439]]),
     p("s25", "Galaxy S25", "samsung", [["128GB", 319], ["256GB", 349]]),
