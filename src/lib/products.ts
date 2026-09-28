@@ -377,11 +377,11 @@ const colorSets: Record<string, ColorOption[]> = {
   "mba-13-m2": mbaColors,
   "mbp-16-max": mbpColors,
   "s26-ultra": [
-    { name: "بنفسجي غامق", hex: "#4B3A6B", image: samsungImg },
-    { name: "أزرق سماوي", hex: "#87CEEB", image: samsungImg },
-    { name: "أسود", hex: "#111111", image: samsungImg },
-    { name: "أبيض", hex: "#F5F5F5", image: samsungImg },
-    { name: "ذهبي وردي", hex: "#E8C4B0", image: samsungImg },
+    { name: "بنفسجي غامق", hex: "#4B3A6B", image: s26Violet },
+    { name: "أزرق سماوي", hex: "#87CEEB", image: s26SkyBlue },
+    { name: "أسود", hex: "#111111", image: s26Black },
+    { name: "أبيض", hex: "#F5F5F5", image: s26White },
+    { name: "ذهبي وردي", hex: "#E8C4B0", image: s26PinkGold },
   ],
 
 };
