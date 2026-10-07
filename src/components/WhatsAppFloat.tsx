@@ -1,6 +1,6 @@
 import { useStore } from "@/lib/store";
 
-const GREETING = "مرحباً، أود الاستفسار عن منتجات السيف للهواتف";
+const GREETING = "مرحباً، أود الاستفسار عن منتجات البسمة للهواتف";
 
 export function WhatsAppFloat() {
   const { settings } = useStore();

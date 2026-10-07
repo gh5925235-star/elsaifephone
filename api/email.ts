@@ -13,16 +13,16 @@ export default async function handler(request: any, response: any) {
   try {
     const data = await resend.emails.send({
       // 1. تغيير الإيميل ليكون الدومين الخاص بك
-      from: 'Al Saif Ephone <support@alsaifephone.shop>',
+      from: 'Al Saif Ephone <support@AL BASMAephone.shop>',
       to: [to],
-      subject: 'رمز التحقق لتسجيل الدخول - السيف للهواتف',
+      subject: 'رمز التحقق لتسجيل الدخول - البسمة للهواتف',
       // 2. وضع قالب الـ HTML المنسق
       html: `
       <!DOCTYPE html>
       <html lang="ar" dir="rtl">
       <head>
           <meta charset="UTF-8">
-          <title>رمز التحقق - السيف للهواتف</title>
+          <title>رمز التحقق - البسمة للهواتف</title>
       </head>
       <body style="margin: 0; padding: 0; background-color: #f4f4f7; font-family: Tahoma, Arial, sans-serif;">
           <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f4f4f7; padding: 20px 0;">
@@ -31,7 +31,7 @@ export default async function handler(request: any, response: any) {
                       <table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
                           <tr>
                               <td align="center" style="background-color: #111111; padding: 25px 0;">
-                                  <h1 style="color: #ffffff; margin: 0; font-size: 22px;">السيف للهواتف | Al Saif Ephone</h1>
+                                  <h1 style="color: #ffffff; margin: 0; font-size: 22px;">البسمة للهواتف | Al Saif Ephone</h1>
                               </td>
                           </tr>
                           <tr>
@@ -50,8 +50,8 @@ export default async function handler(request: any, response: any) {
                           </tr>
                           <tr>
                               <td align="center" style="background-color: #f8f9fa; padding: 20px; color: #999999; font-size: 12px;">
-                                  جميع الحقوق محفوظة © 2026 متجر السيف للهواتف<br>
-                                  <a href="http://alsaifephone.shop" style="color: #007bff; text-decoration: none;" target="_blank">alsaifephone.shop</a>
+                                  جميع الحقوق محفوظة © 2026 متجر البسمة للهواتف<br>
+                                  <a href="http://AL BASMAephone.shop" style="color: #007bff; text-decoration: none;" target="_blank">AL BASMAephone.shop</a>
                               </td>
                           </tr>
                       </table>

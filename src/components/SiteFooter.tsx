@@ -31,7 +31,7 @@ const policies: Record<
       },
       {
         heading: "تأكيد الطلب والدفع",
-        body: "لا يصبح الطلب مؤكداً إلا بعد إتمام الدفع أو رسوم التوصيل عبر رابط Benefit المعتمد واستلام رسالة تأكيد من السيف للهواتف.",
+        body: "لا يصبح الطلب مؤكداً إلا بعد إتمام الدفع أو رسوم التوصيل عبر رابط Benefit المعتمد واستلام رسالة تأكيد من البسمة للهواتف.",
       },
     ],
   },
@@ -95,7 +95,7 @@ function PolicyModal({ policy, onClose }: { policy: PolicyKey; onClose: () => vo
               <Icon className="h-5 w-5" />
             </span>
             <div>
-              <p className="text-[10px] font-bold text-gold-foreground">السيف للهواتف · مملكة البحرين</p>
+              <p className="text-[10px] font-bold text-gold-foreground">البسمة للهواتف · مملكة البحرين</p>
               <h2 id="policy-title" className="text-base font-extrabold text-foreground">{content.title}</h2>
             </div>
           </div>
@@ -123,10 +123,10 @@ export function SiteFooter() {
   const { settings } = useStore();
   const [policy, setPolicy] = useState<PolicyKey | null>(null);
   const phone = settings.storePhone || "+973 XXXXXXXX";
-  const email = settings.storeEmail || "support@alsaifphones.com";
+  const email = settings.storeEmail || "support@AL BASMAphones.com";
   const whatsappNumber = phone.replace(/\D/g, "");
   const whatsappHref = whatsappNumber
-    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("مرحباً السيف للهواتف، أود الاستفسار عن أحد الأجهزة.")}`
+    ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent("مرحباً البسمة للهواتف، أود الاستفسار عن أحد الأجهزة.")}`
     : undefined;
 
   const scrollToContact = () => {
@@ -144,12 +144,12 @@ export function SiteFooter() {
                   <Crown className="h-6 w-6" />
                 </span>
                 <div>
-                  <p className="text-lg font-extrabold text-gold">السيف للهواتف</p>
-                  <p className="text-[10px] font-semibold text-primary-foreground/55">ALSAIF PHONES · BAHRAIN</p>
+                  <p className="text-lg font-extrabold text-gold">البسمة للهواتف</p>
+                  <p className="text-[10px] font-semibold text-primary-foreground/55">AL BASMA PHONES · BAHRAIN</p>
                 </div>
               </div>
               <p className="mt-5 max-w-md text-sm font-semibold leading-7 text-primary-foreground/75">
-                السيف للهواتف - وجهتكم الرائدة لأحدث الهواتف الذكية والأجهزة الأصلية في مملكة البحرين.
+                البسمة للهواتف - وجهتكم الرائدة لأحدث الهواتف الذكية والأجهزة الأصلية في مملكة البحرين.
               </p>
             </section>
 

@@ -57,7 +57,7 @@ export function OfficialStamp({ size = 110 }: { size?: number }) {
       height={size}
       viewBox="0 0 200 200"
       style={{ transform: "rotate(-14deg)", opacity: 0.92 }}
-      aria-label="ختم مؤسسة السيف للهواتف"
+      aria-label="ختم مؤسسة البسمة للهواتف"
     >
       <defs>
         <path
@@ -76,7 +76,7 @@ export function OfficialStamp({ size = 110 }: { size?: number }) {
       <circle cx="100" cy="100" r="52" fill="none" stroke={navy} strokeWidth="2" />
       <text fill={navy} fontSize="15" fontWeight="bold" letterSpacing="0.5">
         <textPath href="#taj-stamp-top" startOffset="50%" textAnchor="middle">
-          مؤسسة السيف للهواتف للتجارة • ALSAIF PHONES
+          مؤسسة البسمة للهواتف للتجارة • AL BASMA PHONES
         </textPath>
       </text>
       <text fill={navy} fontSize="12" fontWeight="bold">
@@ -108,7 +108,7 @@ function Letterhead({ title, serial, date }: { title: string; serial: string; da
       >
         <div>
           <h2 style={{ margin: 0, color: "#8B1538", fontSize: 22 }}>
-            السيف للهواتف | ALSAIF PHONES 👑
+            البسمة للهواتف | AL BASMA PHONES 👑
           </h2>
           <p style={{ margin: "3px 0", fontSize: 13, color: "#64748b" }}>
             مملكة البحرين • أجهزة وهواتف ذكية بأقساط ميسرة
@@ -268,7 +268,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
           }}
         >
           📌 ملاحظة هامة: يتم سداد الأقساط الشهرية في موعد استحقاقها عبر تطبيق بنفت باي
-          (BenefitPay) أو القنوات المعتمدة لدى مؤسسة السيف للهواتف.
+          (BenefitPay) أو القنوات المعتمدة لدى مؤسسة البسمة للهواتف.
         </p>
 
         <table
@@ -279,7 +279,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
             <tr>
               <td style={{ width: "50%", verticalAlign: "top", padding: 10 }}>
                 <p style={{ margin: "0 0 5px 0" }}>
-                  <strong>عن مؤسسة السيف للهواتف:</strong> التوقيع والختم
+                  <strong>عن مؤسسة البسمة للهواتف:</strong> التوقيع والختم
                 </p>
                 <OfficialStamp size={95} />
               </td>
@@ -316,7 +316,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
           }}
         >
           <p style={{ margin: "4px 0" }}>
-            <strong>الطرف الأول (البائع):</strong> مؤسسة السيف للهواتف للتجارة والتوزيع، الكائن
+            <strong>الطرف الأول (البائع):</strong> مؤسسة البسمة للهواتف للتجارة والتوزيع، الكائن
             مقرها بمملكة البحرين.
           </p>
           <p style={{ margin: "4px 0" }}>
@@ -433,8 +433,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
             <tr>
               <td style={{ width: "50%", verticalAlign: "top", padding: 10 }}>
                 <p style={{ margin: "0 0 5px 0" }}>
-                  <strong>الطرف الأول (البائع):</strong> مؤسسة السيف للهواتف
-                </p>
+                  <strong>الطرف الأول (البائع):</strong> مؤسسة البسمة للهواتف                </p>
                 <p style={{ margin: "0 0 40px 0" }}>
                   <strong>التوقيع والختم:</strong> .....................................
                 </p>
@@ -550,7 +549,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
         <Letterhead title="سند قبض رسمي" serial={`SAIF-RCV-${order.id}`} date={date} />
         <div style={{ fontSize: 14, lineHeight: 2 }}>
           <p>
-            استلمنا نحن <strong>مؤسسة السيف للهواتف للتجارة والتوزيع</strong> من السيد/ة{" "}
+            استلمنا نحن <strong>مؤسسة البسمة للهواتف للتجارة والتوزيع</strong> من السيد/ة{" "}
             <strong>{order.name}</strong> (CPR: {order.cpr || "—"})
           </p>
           <p>
@@ -570,8 +569,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
           <tbody>
             <tr>
               <td style={{ padding: 10 }}>
-                <strong>المستلم:</strong> مؤسسة السيف للهواتف
-                <div style={{ marginTop: 20 }}>
+                <strong>المستلم:</strong> مؤسسة البسمة للهواتف                <div style={{ marginTop: 20 }}>
                   <OfficialStamp size={100} />
                 </div>
               </td>
@@ -596,7 +594,7 @@ export function DocumentView({ order, type }: { order: Order; type: DocType }) {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <div style={{ fontSize: 13 }}>
           <p style={{ margin: "2px 0" }}>
-            <strong>المرسل:</strong> السيف للهواتف — مملكة البحرين
+            <strong>المرسل:</strong> البسمة للهواتف — مملكة البحرين
           </p>
           <p style={{ margin: "2px 0" }}>
             <strong>هاتف المرسل:</strong> +973 3000 0000
@@ -675,15 +673,15 @@ export function PrintModal({
   function pdfFileName(type: DocType, orderId: string) {
     switch (type) {
       case "contract":
-        return `عقد_تقسيط_السيف_للهواتف_${orderId}.pdf`;
+        return `عقد_تقسيط_البسمة_للهواتف_${orderId}.pdf`;
       case "invoice":
-        return `فاتورة_السيف_للهواتف_${orderId}.pdf`;
+        return `فاتورة_البسمة_للهواتف_${orderId}.pdf`;
       case "receipt":
-        return `سند_قبض_السيف_للهواتف_${orderId}.pdf`;
+        return `سند_قبض_البسمة_للهواتف_${orderId}.pdf`;
       case "manifest":
-        return `بوليصة_شحن_السيف_للهواتف_${orderId}.pdf`;
+        return `بوليصة_شحن_البسمة_للهواتف_${orderId}.pdf`;
       case "schedule":
-        return `جدول_اقساط_السيف_للهواتف_${orderId}.pdf`;
+        return `جدول_اقساط_البسمة_للهواتف_${orderId}.pdf`;
     }
   }
 
@@ -715,8 +713,8 @@ export function PrintModal({
     const fullPhone = phone.startsWith("973") ? phone : `973${phone}`;
     const message =
       type === "schedule"
-        ? `مرحباً عزيزنا ${order.name} 👑\nنرفق لكم جدول مواعيد سداد الأقساط الشهرية المعتمد لطلبكم رقم: #${order.id}.\nطريقة السداد المعتمدة: تطبيق بنفت باي (BenefitPay).\nالسيف للهواتف | مملكة البحرين 🇧🇭`
-        : `مرحباً ${order.name}،\nمعك مؤسسة السيف للهواتف 👑\nنرسل لك ${docLabels[type]} الخاصة بطلبك رقم #${order.id} (${order.device} ${order.storage}).\nيرجى الاطلاع على ملف الـ PDF المرفق، وشكراً لتعاملكم معنا.`;
+        ? `مرحباً عزيزنا ${order.name} 👑\nنرفق لكم جدول مواعيد سداد الأقساط الشهرية المعتمد لطلبكم رقم: #${order.id}.\nطريقة السداد المعتمدة: تطبيق بنفت باي (BenefitPay).\nالبسمة للهواتف | مملكة البحرين 🇧🇭`
+        : `مرحباً ${order.name}،\nمعك مؤسسة البسمة للهواتف 👑\nنرسل لك ${docLabels[type]} الخاصة بطلبك رقم #${order.id} (${order.device} ${order.storage}).\nيرجى الاطلاع على ملف الـ PDF المرفق، وشكراً لتعاملكم معنا.`;
     window.open(`https://wa.me/${fullPhone}?text=${encodeURIComponent(message)}`, "_blank");
   }
 

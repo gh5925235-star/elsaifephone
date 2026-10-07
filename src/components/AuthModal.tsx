@@ -122,7 +122,7 @@ export function AuthModal({ open, onClose }: { open: boolean; onClose: () => voi
             </div>
             <div className="text-left" dir="rtl">
               <p className="text-[11px] font-bold tracking-[0.3em] text-gold">CUSTOMER ACCESS</p>
-              <h2 className="mt-1 text-2xl font-extrabold">مساحتك في السيف للهواتف</h2>
+              <h2 className="mt-1 text-2xl font-extrabold">مساحتك في البسمة للهواتف</h2>
               <p className="mt-2 text-xs leading-relaxed text-primary-foreground/70">
                 دخول سريع وآمن عبر رمز مؤقت يصل إلى بريدك الإلكتروني.
               </p>

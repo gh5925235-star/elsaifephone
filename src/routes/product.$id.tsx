@@ -6,16 +6,16 @@ import { useStore } from "@/lib/store";
 export const Route = createFileRoute("/product/$id")({
   head: () => ({
     meta: [
-      { title: "تفاصيل الجهاز | السيف للهواتف" },
+      { title: "تفاصيل الجهاز | البسمة للهواتف" },
       {
         name: "description",
         content:
-          "اختر السعة واللون المناسب لجهازك من السيف للهواتف مع أسعار بالدينار البحريني وخطط تقسيط مرنة.",
+          "اختر السعة واللون المناسب لجهازك من البسمة للهواتف مع أسعار بالدينار البحريني وخطط تقسيط مرنة.",
       },
-      { property: "og:title", content: "تفاصيل الجهاز | السيف للهواتف" },
+      { property: "og:title", content: "تفاصيل الجهاز | البسمة للهواتف" },
       {
         property: "og:description",
-        content: "اختر السعة واللون وشاهد صور كل لون قبل الطلب من السيف للهواتف.",
+        content: "اختر السعة واللون وشاهد صور كل لون قبل الطلب من البسمة للهواتف.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

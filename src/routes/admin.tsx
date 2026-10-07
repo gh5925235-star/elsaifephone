@@ -66,9 +66,9 @@ function ImageUpload({
 export const Route = createFileRoute("/admin")({
   head: () => ({
     meta: [
-      { title: "لوحة تحكم الإدارة | السيف للهواتف" },
-      { name: "description", content: "إدارة الطلبات والمنتجات وإعدادات متجر السيف للهواتف." },
-      { property: "og:title", content: "لوحة تحكم الإدارة | السيف للهواتف" },
+      { title: "لوحة تحكم الإدارة | البسمة للهواتف" },
+      { name: "description", content: "إدارة الطلبات والمنتجات وإعدادات متجر البسمة للهواتف." },
+      { property: "og:title", content: "لوحة تحكم الإدارة | البسمة للهواتف" },
       { property: "og:description", content: "إدارة الطلبات والمنتجات والإعدادات." },
       { name: "robots", content: "noindex" },
     ],
@@ -94,7 +94,7 @@ function LoginGate() {
     <div className="mx-auto flex max-w-md flex-col justify-center px-4 py-16">
       <div className="rounded-3xl border border-border bg-card p-7 shadow-lift">
         <h1 className="text-center text-lg font-extrabold">
-          تسجيل دخول الإدارة | <span className="text-gold-gradient">السيف للهواتف</span> 👑
+          تسجيل دخول الإدارة | <span className="text-gold-gradient">البسمة للهواتف</span> 👑
         </h1>
         <p className="mt-2 text-center text-xs text-muted-foreground">
           هذه المنطقة مخصصة لفريق الإدارة فقط.
@@ -179,7 +179,7 @@ function Dashboard() {
     <div className="mx-auto max-w-6xl px-4 py-6 pb-20">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl font-extrabold">
-          لوحة تحكم <span className="text-gold-gradient">السيف للهواتف</span> 👑
+          لوحة تحكم <span className="text-gold-gradient">البسمة للهواتف</span> 👑
         </h1>
         <button
           onClick={logout}
@@ -225,7 +225,7 @@ const docButtons: { type: DocType; label: string }[] = [
 ];
 
 function waLink(o: Order) {
-  const text = `👑 مرحباً ${o.name}، شكراً لطلبك من السيف للهواتف!
+  const text = `👑 مرحباً ${o.name}، شكراً لطلبك من البسمة للهواتف!
 
 📱 الجهاز: ${o.device} ${o.storage}${o.color ? ` - ${o.color}` : ""}
 💰 إجمالي المبلغ: ${o.total.toFixed(3)} د.ب
@@ -1046,7 +1046,7 @@ const saveToDatabase = async (currentForm) => {
         <div className="space-y-3">
           {field("رابط الدفع المباشر Benefit", "benefitPayUrl", "https://...")}
           {field("اسم البنك", "bankName", "بنك البحرين الوطني")}
-          {field("اسم صاحب الحساب", "accountName", "مؤسسة السيف للهواتف للتجارة")}
+          {field("اسم صاحب الحساب", "accountName", "مؤسسة البسمة للهواتف للتجارة")}
           {field("رقم الآيبان الدولي (IBAN)", "iban", "BH00XXXX00000000000000")}
         </div>
       </div>
@@ -1054,7 +1054,7 @@ const saveToDatabase = async (currentForm) => {
         <h3 className="mb-3 text-sm font-extrabold">بيانات التواصل في أسفل المتجر</h3>
         <div className="space-y-3">
           {field("رقم واتساب الدعم الفني", "storePhone", "+973 XXXXXXXX")}
-          {field("بريد المتجر", "storeEmail", "support@alsaifphones.com")}
+          {field("بريد المتجر", "storeEmail", "support@AL BASMAphones.com")}
         </div>
       </div>
       <div className="rounded-2xl border border-border bg-surface p-4">
@@ -1068,7 +1068,7 @@ const saveToDatabase = async (currentForm) => {
             saveSettings(form);
             const r = await sendTelegram(
               form,
-              "🔔 رسالة اختبار من متجر السيف للهواتف — الإشعارات تعمل بنجاح ✓",
+              "🔔 رسالة اختبار من متجر البسمة للهواتف — الإشعارات تعمل بنجاح ✓",
             );
             setTgTest(r.ok ? "تم الإرسال ✓ تحقق من محادثة تيليجرام" : "فشل الإرسال: " + r.error);
           }}

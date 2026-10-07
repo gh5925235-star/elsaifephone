@@ -9,13 +9,13 @@ import { useStore } from "@/lib/store";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "السيف للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
+      { title: "البسمة للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
       {
         name: "description",
         content:
-          "متجر السيف للهواتف: آيفون وسامسونج وبلايستيشن وإيربودز بأسعار بالدينار البحريني مع خطط تقسيط مرنة حتى 24 شهراً وتوصيل خلال 3 ساعات من دفع رسوم التوصيل.",
+          "متجر البسمة للهواتف: آيفون وسامسونج وبلايستيشن وإيربودز بأسعار بالدينار البحريني مع خطط تقسيط مرنة حتى 24 شهراً وتوصيل خلال 3 ساعات من دفع رسوم التوصيل.",
       },
-      { property: "og:title", content: "السيف للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
+      { property: "og:title", content: "البسمة للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
       {
         property: "og:description",
         content: "أحدث الأجهزة بالدينار البحريني مع تقسيط مرن حتى 24 شهراً وتوصيل خلال 3 ساعات من دفع رسوم التوصيل.",
@@ -50,7 +50,7 @@ function Index() {
         />
         <div className="absolute inset-0 flex flex-col justify-center bg-background/55 px-6 backdrop-blur-[2px] md:px-12">
           <p className="text-xs font-bold tracking-widest text-gold-gradient">
-            ALSAIF PHONES · BAHRAIN
+            AL BASMA PHONES · BAHRAIN
           </p>
           <h1 className="mt-2 max-w-md text-2xl font-extrabold leading-snug md:text-4xl">
             أجهزتك الفاخرة... بالتقسيط المريح

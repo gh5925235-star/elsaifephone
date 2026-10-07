@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "السيف للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
+      { title: "البسمة للهواتف | أجهزة أصلية بالتقسيط في البحرين" },
       {
         name: "description",
         content: "أحدث الأجهزة بالدينار البحريني مع تقسيط مرن وتوصيل فاخر داخل البحرين.",

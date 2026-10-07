@@ -1,4 +1,4 @@
-# السيف للهواتف | ALSAIF PHONES
+# البسمة للهواتف | AL BASMA PHONES
 
 Luxury e-commerce and device-installment platform tailored for the Kingdom of Bahrain.
 

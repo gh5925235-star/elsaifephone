@@ -8,13 +8,13 @@ import benefitLogoAsset from "@/assets/benefit-logo.png.asset.json";
 export const Route = createFileRoute("/checkout")({
   head: () => ({
     meta: [
-      { title: "إتمام الطلب والتقسيط | السيف للهواتف" },
+      { title: "إتمام الطلب والتقسيط | البسمة للهواتف" },
       {
         name: "description",
         content:
           "احسب دفعتك الأولى وقسطك الشهري خلال ثوانٍ، ثم أكمل طلبك بالدفع المسبق أو الدفع عند الاستلام.",
       },
-      { property: "og:title", content: "إتمام الطلب والتقسيط | السيف للهواتف" },
+      { property: "og:title", content: "إتمام الطلب والتقسيط | البسمة للهواتف" },
       {
         property: "og:description",
         content: "حاسبة أقساط فورية وإتمام طلب سريع مع توصيل خلال ١٢ ساعة.",
@@ -112,7 +112,7 @@ useEffect(() => {
   const orderModeLabel = isCash ? "شراء نقداً كامل" : "طلب تقسيط شهري";
   const successAmount = isCash ? cashTotal : total;
   const whatsappMessage = orderId
-    ? `مرحباً السيف للهواتف، قمت بإتمام طلبي عبر المتجر:\n\n- رقم الطلب: #${orderId}\n- الجهاز: ${device} (${storages} - ${chosenColor})\n- طريقة الدفع: ${orderModeLabel}\n- المبلغ: ${successAmount.toFixed(3)} د.ب\n\nأرجو تأكيد موعد التوصيل، شكراً لكم!`
+    ? `مرحباً البسمة للهواتف، قمت بإتمام طلبي عبر المتجر:\n\n- رقم الطلب: #${orderId}\n- الجهاز: ${device} (${storages} - ${chosenColor})\n- طريقة الدفع: ${orderModeLabel}\n- المبلغ: ${successAmount.toFixed(3)} د.ب\n\nأرجو تأكيد موعد التوصيل، شكراً لكم!`
     : "";
   const whatsappHref = supportDigits && whatsappMessage
     ? `https://wa.me/${supportDigits}?text=${encodeURIComponent(whatsappMessage)}`

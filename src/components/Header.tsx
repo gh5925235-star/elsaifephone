@@ -27,7 +27,7 @@ export function Header() {
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl">👑</span>
             <span className="text-lg font-extrabold tracking-tight">
-              <span className="text-gold-gradient">السيف للهواتف</span>
+              <span className="text-gold-gradient">البسمة للهواتف</span>
             </span>
           </Link>
         </div>

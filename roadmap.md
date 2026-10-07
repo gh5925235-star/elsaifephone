@@ -1,5 +1,4 @@
-# Roadmap — السيف للهواتف
-
+# Roadmap — البسمة للهواتف
 - [x] Admin login gate (admin / admin20000) + logout
 - [x] Admin Tab 1: orders & customers table, WhatsApp button, status, edit/delete
 - [x] Admin printable docs: tax invoice, installment contract, receipt voucher, Dilmun manifest
